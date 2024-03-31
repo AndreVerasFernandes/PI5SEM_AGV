@@ -5,8 +5,10 @@
 #include <ESPmDNS.h>
 #include <Update.h>
 
-const char* loginPage();
-const char* updatePage();
+// const char* loginPage();
+// const char* updatePage();
+void updateSetup();
+void updateLoop();
  
 /* Constantes - conexão wi-fi e webserver */
 const char* host = "DUP";
@@ -16,16 +18,15 @@ const char* password = "hi12345678"; /* coloque aqui a senha da rede wi-fi que o
 /* Variáveis globais */
 int contador_ms = 0;
  
-/* Webserver para se comunicar via browser com ESP32  */
-WebServer server(80);
+
  
 /* Códigos da página que será aberta no browser 
    (quando comunicar via browser com o ESP32) 
    Esta página exigirá um login e senha, de modo que somente 
    quem tenha estas informações consiga atualizar o firmware 
    do ESP32 de forma OTA */
-const char* loginIndex = loginPage(); 
-const char* serverIndex = updatePage();
+// const char* loginIndex = loginPage(); 
+// const char* serverIndex = updatePage();
 
  
 void setup(void) 
@@ -59,57 +60,12 @@ void setup(void)
    
     Serial.println("mDNS configurado e inicializado;");
    
-    /* Configfura as páginas de login e upload de firmware OTA */
-    server.on("/", HTTP_GET, []() 
-    {
-        server.sendHeader("Connection", "close");
-        server.send(200, "text/html", (loginIndex));
-    });
-     
-    server.on("/serverIndex", HTTP_GET, []() 
-    {
-        server.sendHeader("Connection", "close");
-        server.send(200, "text/html", serverIndex);
-    });
-   
-    /* Define tratamentos do update de firmware OTA */
-    server.on("/update", HTTP_POST, []() 
-    {
-        server.sendHeader("Connection", "close");
-        server.send(200, "text/plain", (Update.hasError()) ? "FAIL" : "OK");
-        ESP.restart();
-    }, []() {
-        HTTPUpload& upload = server.upload();
-         
-        if (upload.status == UPLOAD_FILE_START) 
-        {
-            /* Inicio do upload de firmware OTA */
-            Serial.printf("Update: %s\n", upload.filename.c_str());
-            if (!Update.begin(UPDATE_SIZE_UNKNOWN)) 
-                Update.printError(Serial);
-        } 
-        else if (upload.status == UPLOAD_FILE_WRITE) 
-        {
-            /* Escrevendo firmware enviado na flash do ESP32 */
-            if (Update.write(upload.buf, upload.currentSize) != upload.currentSize) 
-                Update.printError(Serial);      
-        } 
-        else if (upload.status == UPLOAD_FILE_END) 
-        {
-            /* Final de upload */
-            if (Update.end(true))             
-                Serial.printf("Sucesso no update de firmware: %u\nReiniciando ESP32...\n", upload.totalSize);
-            else
-                Update.printError(Serial);
-        }   
-    });
-    server.begin();
+    updateSetup();
 }
  
-void loop() 
-{
-    server.handleClient();
-    delay(1);
+void loop(){
+
+    updateLoop();
  
     contador_ms++;
  
@@ -118,5 +74,6 @@ void loop()
         Serial.print("Servidor online, acesse pelo IP: ");
         Serial.println(WiFi.localIP());
         contador_ms = 0;
+       
     }
 }
