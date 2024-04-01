@@ -83,7 +83,7 @@ const char* updatePage(){
     "background-color: #FFE34C;"
     "}"
 
-"</style"
+"</style>"
 
 "<script>"
     "$('form').submit(function(e){"
