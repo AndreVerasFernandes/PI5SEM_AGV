@@ -221,6 +221,8 @@
                 "C:\\Users\\Conta\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.11\\libraries\\WebServer\\src",
                 "C:\\Users\\Conta\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.11\\libraries\\ESPmDNS\\src",
                 "C:\\Users\\Conta\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.11\\libraries\\Update\\src",
+                "C:\\Users\\Conta\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.11\\libraries\\HTTPClient\\src",
+                "C:\\Users\\Conta\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.11\\libraries\\WiFiClientSecure\\src",
                 "C:\\Users\\Conta\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.11\\libraries\\FS\\src",
                 "c:\\users\\conta\\appdata\\local\\arduino15\\packages\\esp32\\tools\\xtensa-esp32-elf-gcc\\esp-2021r2-patch5-8.4.0\\xtensa-esp32-elf\\include\\c++\\8.4.0",
                 "c:\\users\\conta\\appdata\\local\\arduino15\\packages\\esp32\\tools\\xtensa-esp32-elf-gcc\\esp-2021r2-patch5-8.4.0\\xtensa-esp32-elf\\include\\c++\\8.4.0\\xtensa-esp32-elf",
