@@ -1,5 +1,8 @@
 /*  Programa para ESP32 antes da atualização OTA */
+#include <WiFi.h>
+#include <WiFiClient.h>
 #include <WebServer.h>
+#include <ESPmDNS.h>
 #include <Update.h>
 
 const char* loginPage();
@@ -57,7 +60,15 @@ void updateSetup(){
                 Update.printError(Serial);
         }   
     });
+    
+}
+
+void StartUpdateServer(){
     server.begin();
+}
+
+void StopUpdateServer(){
+    server.stop();
 }
 
 void updateLoop(){
