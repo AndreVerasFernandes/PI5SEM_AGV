@@ -4,11 +4,14 @@
 #include <WebServer.h>
 #include <ESPmDNS.h>
 #include <Update.h>
+#include <HTTPClient.h>
 
 // const char* loginPage();
 // const char* updatePage();
 void updateSetup();
 void updateLoop();
+void StartUpdateServer();
+void StopUpdateServer();
  
 /* Constantes - conexão wi-fi e webserver */
 const char* host = "DUP";
@@ -61,6 +64,9 @@ void setup(void)
     Serial.println("mDNS configurado e inicializado;");
    
     updateSetup();
+
+    StartUpdateServer();
+
 }
  
 void loop(){
@@ -73,6 +79,7 @@ void loop(){
     {    
         Serial.print("Servidor online, acesse pelo IP: ");
         Serial.println(WiFi.localIP());
+        Serial.println("Atualizado via PC");
         contador_ms = 0;
        
     }
